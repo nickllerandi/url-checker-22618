@@ -6,9 +6,15 @@ import tempfile
 app = Flask(__name__)
 
 
+@app.route('/')
+def home():
+    return "hello"
+
+
 @app.route('/fios')
 def fios():
     return render_template("fios.html")
+
 
 @app.route('/fiosUpload', methods=['POST'])
 def fiosUpload():
