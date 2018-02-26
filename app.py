@@ -9,8 +9,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Available endpoints:<br>" \
-           "/fios"
+    return render_template('home.html')
 
 
 @app.route('/fios')
