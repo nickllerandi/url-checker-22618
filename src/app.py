@@ -2,13 +2,15 @@ from flask import Flask, render_template, request, Response
 import pandas as pd
 import numpy as np
 import tempfile
+import os
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def home():
-    return "hello"
+    return "Available endpoints:<br>" \
+           "/fios"
 
 
 @app.route('/fios')
@@ -39,4 +41,5 @@ def fiosUpload():
     return str(split_data)
 
 if __name__ == '__main__':
-    app.run(port=4996)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=True, port=port)
