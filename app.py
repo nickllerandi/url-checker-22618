@@ -2,8 +2,6 @@ from flask import Flask, render_template, request, Response
 import pandas as pd
 import numpy as np
 import tempfile
-import os
-
 app = Flask(__name__)
 
 
