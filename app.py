@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, Response
 import pandas as pd
 import numpy as np
 import tempfile
+import requests
+
 app = Flask(__name__)
 
 
@@ -22,12 +24,6 @@ def fiosUpload():
     tempfile_path = tempfile.NamedTemporaryFile().name
     fiosFile.save(tempfile_path)
 
-    # make sure these are getting deleted - or add delete command
-    # print(tempfile_path)
-
-    # pandas
-    # sheet = pd.read_csv(tempfile_path)
-
     data = open(tempfile_path).read()
     rows = data.split('\n')
     split_data = []
@@ -35,7 +31,23 @@ def fiosUpload():
         split_row = row.split(',')
         split_data.append(split_row)
 
-    return str(split_data)
+    response_data = {}
+    for i in split_data:
+        # tc = i[8]
+        # lp = i[19]
+        # lpr = str(requests.get(lp).status_code)
+        uid = i[21][-4:]
+        # cmp = i[32]
+        # cmpuid = i[32][-4:]
+        url = i[34]
+        # urluid = i[34][-12:-8]
+        urlr = str(requests.get(url).status_code)
+
+        print(uid + " : " + urlr)
+
+        response_data[uid] = urlr
+
+    return str(response_data)
 
 if __name__ == '__main__':
     app.run()
