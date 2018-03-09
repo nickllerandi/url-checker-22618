@@ -31,8 +31,9 @@ def fiosUpload():
         split_row = row.split(',')
         split_data.append(split_row)
 
-    data = {}
+    data = []
     for i in split_data:
+        dict_data = {}
         # tc = i[8]
         # lp = i[19]
         # lpr = str(requests.get(lp).status_code)
@@ -45,10 +46,13 @@ def fiosUpload():
 
         print(uid + " : " + urlr)
 
-        data[uid] = (url, urlr)
+        dict_data[uid] = (url, urlr)
+        data.append(dict_data)
 
-    # return render_template("fiosuploadresults.html", data=data)
-    return jsonify(data)
+    print(data)
+
+    return render_template("fiosuploadresults.html", data=data)
+    # return str(data)
 
 if __name__ == '__main__':
     app.run()

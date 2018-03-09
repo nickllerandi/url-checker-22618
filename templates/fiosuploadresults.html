@@ -1,13 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
-   <h1>Results</h1>
-
-   <ul>
-    {% for data in data %}
-        <li>{{data}}</li>
-        {% for each in data %}
-            <li>{{ data[i] }}</li>
+<h1>Results</h1>
+<div class="container">
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Counter</th>
+<th>Encoded URL</th>
+<th>Encoded URL Response</th>
+</tr>
+</thead>
+<tbody>
+    {% for dict_item in data %}
+        {% for key, value in dict_item.items() %}
+            <tr>
+                <td>{{ key }}</td>
+                <td>{{ value[0] }}</td>
+                <td>{{ value[1] }}</td>
+            </tr>
         {% endfor %}
     {% endfor %}
-   </ul>
+</tbody>
+</table>
+</div>
 {% endblock %}
