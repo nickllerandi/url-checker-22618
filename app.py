@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, Response
+from flask import Flask, render_template, request, Response, jsonify
 import pandas as pd
 import numpy as np
 import tempfile
@@ -31,7 +31,7 @@ def fiosUpload():
         split_row = row.split(',')
         split_data.append(split_row)
 
-    response_data = {}
+    data = {}
     for i in split_data:
         # tc = i[8]
         # lp = i[19]
@@ -45,9 +45,10 @@ def fiosUpload():
 
         print(uid + " : " + urlr)
 
-        response_data[uid] = urlr
+        data[uid] = (url, urlr)
 
-    return str(response_data)
+    # return render_template("fiosuploadresults.html", data=data)
+    return jsonify(data)
 
 if __name__ == '__main__':
     app.run()
