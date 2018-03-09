@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import tempfile
 import requests
+# import re
 
 app = Flask(__name__)
 
@@ -39,7 +40,8 @@ def fiosUpload():
     data = []
     for i in split_data:
         dict_data = {}
-        # tc = i[8]
+        tc = i[8]
+        tcr = "in progress"
         # lp = i[19]
         # lpr = str(requests.get(lp).status_code)
         uid = i[21][-4:]
@@ -49,15 +51,19 @@ def fiosUpload():
         # urluid = i[34][-12:-8]
         urlr = str(requests.get(url).status_code)
 
-        print(uid + " : " + urlr)
+        # if is_allowed_specific_char(tc) == False:
+        #     tcr = "Remove special characters"
+        # else:
+        #     tcr = "cool"
 
-        dict_data[uid] = (url, urlr)
+        dict_data[uid] = (url, urlr, tcr)
         data.append(dict_data)
+
+        print(uid + " : " + urlr)
 
     print(data)
 
     return render_template("fiosuploadresults.html", data=data)
-    # return str(data)
 
 if __name__ == '__main__':
     app.run()

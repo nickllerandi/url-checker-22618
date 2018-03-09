@@ -6,6 +6,7 @@
 <thead>
 <tr>
 <th>Counter</th>
+<th>Special Characters</th>
 <th>Encoded URL</th>
 <th>Encoded URL Response</th>
 </tr>
@@ -15,6 +16,7 @@
         {% for key, value in dict_item.items() %}
             <tr>
                 <td>{{ key }}</td>
+                <td>{{ value[2] }}</td>
                 <td>{{ value[0] }}</td>
                 <td>{{ value[1] }}</td>
             </tr>
